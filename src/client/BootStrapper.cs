@@ -3,6 +3,7 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Threading.Tasks;
+
     using agents.Group;
 
     using Microsoft.SemanticKernel;
@@ -37,19 +38,19 @@
         {
             GroupAgent groupAgent = new GroupAgent();
             var agentGroupChat = groupAgent.CreateAgentGroupChat(_kernel);
-          
+
             while (true)
             {
-                Console.WriteLine( "give the command");
+                Console.WriteLine("give the command");
                 string query = Console.ReadLine();
                 agentGroupChat.AddChatMessage(new ChatMessageContent(AuthorRole.User, query));
                 await foreach (var content in agentGroupChat.InvokeAsync())
                 {
                     if (!string.IsNullOrWhiteSpace(content.Content))
                     {
-                        Console.WriteLine($"# {content.Role} - {content.AuthorName ?? "*"}: '{content.Content}'");                      
+                        Console.WriteLine($"# {content.Role} - {content.AuthorName ?? "*"}: '{content.Content}'");
                     }
-                    Task.Delay(15000).Wait(); 
+                    Task.Delay(15000).Wait();
                 }
             }
         }

@@ -3,9 +3,10 @@
     using System.Diagnostics.CodeAnalysis;
 
     using agents.Email;
+    using agents.Orchestrator;
     using agents.ProjectAccess;
     using agents.Repository;
-    using agents.Orchestrator;
+
     using Microsoft.SemanticKernel;
     using Microsoft.SemanticKernel.Agents;
 
@@ -15,7 +16,7 @@
         public AgentGroupChat CreateAgentGroupChat(Kernel kernel)
         {
 
-            var emailAgent = new EmailAgent().Create(kernel); 
+            var emailAgent = new EmailAgent().Create(kernel);
             var repoAgent = new RepositoryAgent().Create(kernel);
             var projectAgent = new ProjectAgent().Create(kernel);
 
@@ -24,7 +25,7 @@
 
             return new AgentGroupChat(emailAgent, repoAgent, projectAgent)
             {
-                ExecutionSettings = chatOrchestrator.CreateExecutionSettings([projectAgent])                
+                ExecutionSettings = chatOrchestrator.CreateExecutionSettings([projectAgent])
 
             };
         }

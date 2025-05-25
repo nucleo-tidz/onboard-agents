@@ -1,8 +1,6 @@
 ﻿namespace agents.ProjectAccess
 {
-    using agents.Email.Tools;
     using agents.ProjectAccess.Tools;
-    using agents.Repository.Tools;
 
     using Microsoft.SemanticKernel;
     using Microsoft.SemanticKernel.Agents;

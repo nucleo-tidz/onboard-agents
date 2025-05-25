@@ -9,6 +9,7 @@
         [KernelFunction, Description("Generates a professional company email address in the format firstname.lastname@nucleotidz.com based on the provided first and last name.")]
         public string CreateEmail(string firstName, string secondName)
         {
+
             if (string.IsNullOrWhiteSpace(firstName) || string.IsNullOrWhiteSpace(secondName))
             {
                 throw new ArgumentException("First name and second name must be provided.");

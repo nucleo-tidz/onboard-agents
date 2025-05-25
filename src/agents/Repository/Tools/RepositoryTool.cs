@@ -1,6 +1,7 @@
 ﻿namespace agents.Repository.Tools
 {
     using System.ComponentModel;
+
     using Microsoft.SemanticKernel;
 
     public class RepositoryTool

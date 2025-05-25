@@ -36,12 +36,12 @@
 
                Return ONLY  the name of the next agent to act. Do NOT include any explanation or extra text.Just the name.
                """
-            );  
+            );
 
             return new KernelFunctionSelectionStrategy(selectionFunction, kernel)
             {
                 HistoryVariableName = "history",
-                HistoryReducer= new ChatHistorySummarizationReducer(kernel.GetRequiredService<IChatCompletionService>(), 5, 2)
+                HistoryReducer = new ChatHistoryTruncationReducer(1),
 
             };
         }
@@ -56,8 +56,8 @@
             - RepositoryAgent has granted GitHub access.
             - ProjectAgent has created a username in the project database.
 
-            If all three agents have completed their tasks, respond with a single word: yes.
-            Otherwise, respond with: no.
+            If all three agents have completed their tasks, respond with a single word: terminate.
+            Otherwise, respond with: continue.
 
             History:
             {{$history}}
@@ -67,10 +67,10 @@
             return new KernelFunctionTerminationStrategy(terminateFunction, kernel)
             {
                 Agents = agents,
-                ResultParser = result => result.GetValue<string>()?.Contains("yes", StringComparison.OrdinalIgnoreCase) ?? false,
+                ResultParser = result => result.GetValue<string>()?.Contains("terminate", StringComparison.OrdinalIgnoreCase) ?? false,
                 HistoryVariableName = "history",
                 MaximumIterations = 3,
-               HistoryReducer = new ChatHistorySummarizationReducer(kernel.GetRequiredService<IChatCompletionService>(), 5, 2)
+                HistoryReducer = new ChatHistoryTruncationReducer(1),
             };
         }
 
@@ -79,8 +79,8 @@
         {
             return new AgentGroupChatSettings()
             {
-                TerminationStrategy = CreateTerminationStrategy(agents),                
-                SelectionStrategy = CreateSelectionStrategy(),                
+                TerminationStrategy = CreateTerminationStrategy(agents),
+                SelectionStrategy = CreateSelectionStrategy(),
             };
         }
     }
