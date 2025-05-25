@@ -33,7 +33,7 @@
                History:
                {{$history}}
 
-               Return only the name of the next agent to act. Do not include any explanation or extra text. Do not include any explanation, just the name.
+               Return ONLY  the name of the next agent to act. Do NOT include any explanation or extra text.Just the name.
                """
             );  
 
@@ -74,10 +74,12 @@
         [Experimental("SKEXP0110")]
         public AgentGroupChatSettings CreateExecutionSettings(ChatCompletionAgent[] agents)
         {
-            return new()
+            return new AgentGroupChatSettings()
             {
                 TerminationStrategy = CreateTerminationStrategy(agents),
-                SelectionStrategy = CreateSelectionStrategy()
+                
+                SelectionStrategy = CreateSelectionStrategy(),
+                
             };
         }
     }

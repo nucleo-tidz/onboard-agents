@@ -24,7 +24,8 @@
 
             return new AgentGroupChat(emailAgent, repoAgent, projectAgent)
             {
-                ExecutionSettings = chatOrchestrator.CreateExecutionSettings([projectAgent])
+                ExecutionSettings = chatOrchestrator.CreateExecutionSettings([projectAgent])                
+
             };
         }
     }
