@@ -49,8 +49,7 @@
                     {
                         Console.WriteLine($"# {content.Role} - {content.AuthorName ?? "*"}: '{content.Content}'");                      
                     }
-                    Task.Delay(10000).Wait(); 
-
+                    Task.Delay(15000).Wait(); 
                 }
             }
         }

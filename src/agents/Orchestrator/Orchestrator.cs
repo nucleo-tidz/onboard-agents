@@ -6,6 +6,7 @@
     using Microsoft.SemanticKernel;
     using Microsoft.SemanticKernel.Agents;
     using Microsoft.SemanticKernel.Agents.Chat;
+    using Microsoft.SemanticKernel.ChatCompletion;
 
     public class Orchestrator(Kernel kernel)
     {
@@ -40,7 +41,8 @@
             return new KernelFunctionSelectionStrategy(selectionFunction, kernel)
             {
                 HistoryVariableName = "history",
-               
+                HistoryReducer= new ChatHistorySummarizationReducer(kernel.GetRequiredService<IChatCompletionService>(), 5, 2)
+
             };
         }
 
@@ -67,7 +69,8 @@
                 Agents = agents,
                 ResultParser = result => result.GetValue<string>()?.Contains("yes", StringComparison.OrdinalIgnoreCase) ?? false,
                 HistoryVariableName = "history",
-                MaximumIterations = 10
+                MaximumIterations = 12,
+               HistoryReducer = new ChatHistorySummarizationReducer(kernel.GetRequiredService<IChatCompletionService>(), 5, 2)
             };
         }
 
@@ -76,10 +79,8 @@
         {
             return new AgentGroupChatSettings()
             {
-                TerminationStrategy = CreateTerminationStrategy(agents),
-                
-                SelectionStrategy = CreateSelectionStrategy(),
-                
+                TerminationStrategy = CreateTerminationStrategy(agents),                
+                SelectionStrategy = CreateSelectionStrategy(),                
             };
         }
     }
