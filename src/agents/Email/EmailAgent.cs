@@ -4,9 +4,9 @@
 
     using Microsoft.SemanticKernel;
     using Microsoft.SemanticKernel.Agents;
-    public class EmailAgent(Kernel kernel)
+    public class EmailAgent()
     {
-        public ChatCompletionAgent Create()
+        public ChatCompletionAgent Create(Kernel kernel)
         {
             Kernel agentKernel = kernel.Clone();
             agentKernel.ImportPluginFromType<EmailTool>();

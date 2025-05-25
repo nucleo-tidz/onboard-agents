@@ -1,13 +1,12 @@
 ﻿namespace agents.Repository
 {
-    using agents.Email.Tools;
     using agents.Repository.Tools;
 
     using Microsoft.SemanticKernel;
     using Microsoft.SemanticKernel.Agents;
-    public class RepositoryAgent(Kernel kernel)
+    public class RepositoryAgent()
     {
-        public ChatCompletionAgent Create()
+        public ChatCompletionAgent Create(Kernel kernel)
         {
             Kernel agentKernel = kernel.Clone();
             agentKernel.ImportPluginFromType<RepositoryTool>();

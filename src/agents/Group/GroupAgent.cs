@@ -10,14 +10,14 @@
     using Microsoft.SemanticKernel.Agents;
 
     [Experimental("SKEXP0110")]
-    public class GroupAgent(Kernel kernel)
+    public class GroupAgent()
     {
-        public AgentGroupChat CreateAgentGroupChat()
+        public AgentGroupChat CreateAgentGroupChat(Kernel kernel)
         {
 
-            var emailAgent = new EmailAgent(kernel).Create(); 
-            var repoAgent = new RepositoryAgent(kernel).Create();
-            var projectAgent = new ProjectAgent(kernel).Create();
+            var emailAgent = new EmailAgent().Create(kernel); 
+            var repoAgent = new RepositoryAgent().Create(kernel);
+            var projectAgent = new ProjectAgent().Create(kernel);
 
 
             var chatOrchestrator = new Orchestrator(kernel);

@@ -35,8 +35,8 @@
 #endif
         public async Task Run()
         {
-            GroupAgent groupAgent = new GroupAgent(_kernel);
-            var agentGroupChat = groupAgent.CreateAgentGroupChat();
+            GroupAgent groupAgent = new GroupAgent();
+            var agentGroupChat = groupAgent.CreateAgentGroupChat(_kernel);
           
             while (true)
             {

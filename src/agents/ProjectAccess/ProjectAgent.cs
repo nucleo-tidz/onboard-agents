@@ -6,9 +6,9 @@
 
     using Microsoft.SemanticKernel;
     using Microsoft.SemanticKernel.Agents;
-    public class ProjectAgent(Kernel kernel)
+    public class ProjectAgent()
     {
-        public ChatCompletionAgent Create()
+        public ChatCompletionAgent Create(Kernel kernel)
         {
             Kernel agentKernel = kernel.Clone();
             agentKernel.ImportPluginFromType<ProjectTool>();
