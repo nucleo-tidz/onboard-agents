@@ -27,7 +27,4 @@ The system uses a **KernelFunctionSelectionStrategy** to orchestrate the agents 
 - Microsoft Semantic Kernel
 - C# .NET 7+
 - Azure OpenAI / OpenAI (for chat completions and reasoning)
-- GitHub API (simulated or real)
-- Relational database or in-memory store (for user/project access)
 
----
