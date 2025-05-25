@@ -81,6 +81,7 @@
             {
                 TerminationStrategy = CreateTerminationStrategy(agents),
                 SelectionStrategy = CreateSelectionStrategy(),
+                
             };
         }
     }
