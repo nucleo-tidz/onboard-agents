@@ -10,8 +10,4 @@
     <ProjectReference Include="..\infrastructure\infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Orchestrator\Tools\" />
-  </ItemGroup>
-
 </Project>

@@ -1,16 +1,14 @@
 ﻿namespace client
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
+    using System.Diagnostics.CodeAnalysis;
     using System.Threading.Tasks;
-
-    using agents.Email;
+    using agents.Group;
 
     using Microsoft.SemanticKernel;
     using Microsoft.SemanticKernel.ChatCompletion;
 
+    [Experimental("SKEXP0110")]
     public class BootStrapper : IBootStrapper
     {
         private readonly Kernel _kernel;
@@ -18,6 +16,8 @@
         {
             _kernel = kernel ?? throw new ArgumentNullException(nameof(kernel));
         }
+
+#if false
         public async Task Run()
         {
             var emailAgent = new EmailAgent(_kernel).Create();
@@ -29,6 +29,27 @@
                 await foreach (var message in emailAgent.InvokeAsync(chatHistory))
                 {
                      
+                }
+            }
+        }
+#endif
+        public async Task Run()
+        {
+            GroupAgent groupAgent = new GroupAgent(_kernel);
+            var agentGroupChat = groupAgent.CreateAgentGroupChat();
+          
+            while (true)
+            {
+                Console.WriteLine( "give the command");
+                string query = Console.ReadLine();
+                agentGroupChat.AddChatMessage(new ChatMessageContent(AuthorRole.User, query));
+                await foreach (var content in agentGroupChat.InvokeAsync())
+                {
+                    if (!string.IsNullOrWhiteSpace(content.Content))
+                    {
+                        Console.WriteLine($"# {content.Role} - {content.AuthorName ?? "*"}: '{content.Content}'");                      
+                    }
+                    Task.Delay(20000).Wait(); // Simulate some delay for better readability
                 }
             }
         }
