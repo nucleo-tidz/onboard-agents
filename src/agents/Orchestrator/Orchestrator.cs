@@ -69,7 +69,7 @@
                 Agents = agents,
                 ResultParser = result => result.GetValue<string>()?.Contains("yes", StringComparison.OrdinalIgnoreCase) ?? false,
                 HistoryVariableName = "history",
-                MaximumIterations = 12,
+                MaximumIterations = 3,
                HistoryReducer = new ChatHistorySummarizationReducer(kernel.GetRequiredService<IChatCompletionService>(), 5, 2)
             };
         }

@@ -13,7 +13,7 @@
             return new ChatCompletionAgent()
             {
                 Name = "EmailAgent",
-                Instructions = @" You are an AI agent responsible for onboarding new employees by creating an official email address and drafting a welcome email.
+                Instructions = @" You are an AI agent responsible for onboarding new employees by creating an official email address and drafting a welcome email.You will be provided with an employee's first name and last name, separated by a space. Do not assume or guess the first or last name if it is not explicitly provided.
                                
                                Your workflow includes two steps:
                                1. Create Email Address:
@@ -22,7 +22,7 @@
                                   - Mention their official email address, team name, and start date if available.
                                   - Be clear, concise, and encouraging.
                                   - The email should guide them on what to expect on day one and where to find important resources.
-                                  - Do not include markdown or HTML — plain text only.                       
+                                  - Do not include markdown or HTML — plain text only.                                 
                                ",
                 Kernel = agentKernel,
                 Arguments = new KernelArguments(new PromptExecutionSettings()
