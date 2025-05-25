@@ -10,6 +10,8 @@
 	<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
 	<PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
 	<PackageReference Include="Microsoft.SemanticKernel" Version="1.54.0" />
+	<PackageReference Include="Microsoft.SemanticKernel.Agents.Abstractions" Version="1.54.0" />
+	<PackageReference Include="Microsoft.SemanticKernel.Agents.Core" Version="1.54.0" />
 	<PackageReference Include="Microsoft.SemanticKernel.Connectors.AzureOpenAI" Version="1.54.0" />
 	<PackageReference Include="Microsoft.SemanticKernel.Connectors.Google" Version="1.54.0-alpha" />
 	</ItemGroup>
