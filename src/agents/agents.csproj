@@ -12,8 +12,6 @@
 
   <ItemGroup>
     <Folder Include="Orchestrator\Tools\" />
-    <Folder Include="ProjectAccess\Tools\" />
-    <Folder Include="Repository\Tools\" />
   </ItemGroup>
 
 </Project>

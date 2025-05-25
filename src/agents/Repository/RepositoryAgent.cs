@@ -1,12 +1,26 @@
 ﻿namespace agents.Repository
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+    using agents.Email.Tools;
+    using agents.Repository.Tools;
 
-    internal class RepositoryAgent
+    using Microsoft.SemanticKernel;
+    using Microsoft.SemanticKernel.Agents;
+    public class RepositoryAgent(Kernel kernel)
     {
+        public ChatCompletionAgent Create()
+        {
+            Kernel agentKernel = kernel.Clone();
+            agentKernel.ImportPluginFromType<RepositoryTool>();
+            return new ChatCompletionAgent()
+            {
+                Name = "RepositoryAgent",
+                Instructions = @" You are an AI agent responsible for adding the onboarded user's email to the GitHub organization nucleo-tidz",
+                Kernel = agentKernel,
+                Arguments = new KernelArguments(new PromptExecutionSettings()
+                {
+                    FunctionChoiceBehavior = FunctionChoiceBehavior.Auto()
+                })
+            };
+        }
     }
 }
